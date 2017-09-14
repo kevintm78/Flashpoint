@@ -1,5 +1,4 @@
 boot.img
-AIK/
 arm-eabi-4.8/
 output/
 build_kernel.sh
