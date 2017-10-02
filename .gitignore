@@ -3,8 +3,8 @@ arm-eabi-4.8/
 arm-eabi-5.3/
 output/
 *.sh
-AIK/ramdisk-new.cpio.gz
-AIK-port/ramdisk-new.cpio.gz
+*AIK/ramdisk-new.cpio.gz
+*AIK-port/ramdisk-new.cpio.gz
 *.zip
 # Built application files
 *.apk
