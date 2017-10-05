@@ -697,7 +697,6 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 {
 	struct inode *inode = d_inode(dentry);
 	int err;
-	bool size_changed = false;
 
 	err = inode_change_ok(inode, attr);
 	if (err)
@@ -728,8 +727,6 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 			}
 			inode->i_mtime = inode->i_ctime = current_time(inode);
 		}
-
-		size_changed = true;
 	}
 
 	__setattr_copy(inode, attr);
@@ -742,8 +739,8 @@ int f2fs_setattr(struct dentry *dentry, struct iattr *attr)
 		}
 	}
 
-	/* file size may changed here */
-	f2fs_mark_inode_dirty_sync(inode, size_changed);
+	/* update attributes only */
+	f2fs_mark_inode_dirty_sync(inode, false);
 
 	/* inode change will produce dirty node pages flushed by checkpoint */
 	f2fs_balance_fs(F2FS_I_SB(inode), true);
